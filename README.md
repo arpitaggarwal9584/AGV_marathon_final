@@ -45,3 +45,24 @@ resulting simulation with `vvp`. Compiled simulation files are written to
 ```sh
 make clean
 ```
+
+## Quartus / DE0-Nano pin assignments
+
+[`agv_top.qsf`](./agv_top.qsf) contains the Quartus project settings and the
+standard DE0-Nano `EP4CE22F17C6` pin assignments for the top-level
+[`agv_top`](./src/agv_top.v) module. The signals are grouped on the headers as
+follows:
+
+| Header | Signals |
+| --- | --- |
+| `GPIO_0[0..15]` | OV7670 `cam_pclk`, `cam_href`, `cam_vsync`, `cam_d[7:0]`, `cam_xclk`, `cam_sioc`, `cam_siod`, `cam_reset`, `cam_pwdn` |
+| `GPIO_1[0..13]` | VGA `vga_hsync`, `vga_vsync`, `vga_r[3:0]`, `vga_g[3:0]`, `vga_b[3:0]` |
+| Board pins | `clk50` = 50 MHz oscillator, `rst_n` = `KEY[0]`, `led_config_done` = `LED[0]` |
+
+Open `agv_top.qsf` in Quartus, or create a Quartus project whose top-level
+entity is `agv_top` and add this file as the project's settings file. The
+camera data/control lines and VGA outputs are 3.3 V LVTTL FPGA signals.
+`cam_sioc` and `cam_siod` require external SCCB pull-ups. Connect the VGA
+outputs through a suitable resistor DAC and verify the camera module's voltage
+levels before connecting it to the headers. The QSF has not been validated by
+physical-board bring-up yet.
