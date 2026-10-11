@@ -1,0 +1,5 @@
+build/
+output_files/
+simulation/
+db/
+incremental_db/
