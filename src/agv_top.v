@@ -1,4 +1,3 @@
-=
 module agv_top #(
     parameter RESET_WAIT = 32'd5_000_000,   // camera settle time after reset (~100 ms)
     parameter THRESHOLD  = 8'd64            // Sobel edge threshold (raise = fewer edges)
@@ -85,7 +84,6 @@ module agv_top #(
         .vga_rst_n       (rst_n),
         .vga_frame_start (vga_frame_start),
         .pixel_req       (vga_pixel_req),
-        .rd_addr_in      (vga_rd_addr),
         .pixel_valid     (fb_valid),
         .pixel_data      (fb_data),
         .frame_ready     (fb_ready)
